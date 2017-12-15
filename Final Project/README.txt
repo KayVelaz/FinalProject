@@ -5,3 +5,13 @@ Wrote the text for the HTML page, completed the database for storing data, creat
 Need to implement the search function
 Need to connect the HTML to the SQL database to do queries
 Need to create a box in which to show the results and information from the database query
+
+12/15/17
+TODO:
+add sorting by dates requested
+add formatting for multiple owners returned
+add phone number and email to people table
+
+NOTES:
+to run on Cmder, use "set" + "PGUSER=postgres", "PGHOST=localhost", "PGPASSWORD=XXX", "PGDATABASE=XXX"
+
