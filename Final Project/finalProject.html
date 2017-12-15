@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title> </title>
+
+    <style>
+    
+    </style>
+  </head>
+  <link rel="stylesheet" href="style.css">
+
+  <body>
+    <h1>Flutr</h1>
+    <div id='slogan'>Like Tinder, but for musicians and instruments</div>
+    <p><label>Instrument Type:</label><input id="instrument" type="text" placeholder="Ukulele..."></p>
+    <p><label>Reservation Start Date:</label><input type="date" id="startDate"></p>
+    <p><label>Reservation End Date:</label><input type="date" id="endDate">
+    <p><button id='search' onclick="search()">Search</button></p>
+    <div id="main"></div>
+
+      <script language="javascript">
+      function search() {
+      
+        let instrument = document.getElementById("instrument").value,
+        startDate = document.getElementById("startDate").value,
+        endDate = document.getElementById("endDate").value,
+        myDiv = document.getElementById("main");
+        
+        myDiv.innerHTML = "";
+        
+        let dataSrc = "http://localhost:4001/";
+        let linkEnd = "instruments/" + instrument;
+                
+        let url = dataSrc + linkEnd;
+        fetch(url).then(data => data.json())
+          .then((data) => {
+            for (let i = 0; i < data.rowCount; i++) {
+              getOwner(data.rows[i].ownerid);              
+            }
+          })
+      }
+      
+      function getOwner(id) {
+        let dataSrc = "http://localhost:4001/";
+        let linkEnd = "people/" + id;
+        let url = dataSrc + linkEnd;
+        let output = "";
+        let firstName, lastName, address;
+        fetch(url).then(data => data.json()).then((data) => {
+          var myDiv = document.getElementById("main");
+          myDiv.innerHTML += data.rows[0].firstname + " " + data.rows[0].lastname + " " + data.rows[0].address;
+          })
+      }
+    </script>
+  </body>
+</html>
